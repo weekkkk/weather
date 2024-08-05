@@ -1,0 +1,26 @@
+.ui_input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0;
+  line-height: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px;
+    // border-style: solid;
+    // border-width: 1px;
+    // border-color: #8d8d8d;
+    box-shadow: 0 0 0 1px #8d8d8d;
+    border-radius: 12px;
+    overflow: hidden;
+
+    &-focus {
+      box-shadow: 0 0 0 1px #0019ff;
+    }
+  }
+}

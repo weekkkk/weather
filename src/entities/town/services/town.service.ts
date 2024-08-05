@@ -1,9 +1,8 @@
-import { $town } from "@/entities/api";
-import { ITown } from "../models";
-import { GetTownListDto } from "@/entities/api/dto";
+import { $town, GetTownResponseDto } from "@/entities/api";
+import { GetTownListDto } from "@/entities/api";
 
 export class TownServise {
-  static async getList(dto: GetTownListDto) {
-    return (await $town.get<ITown[]>("/", { params: dto })).data;
+  static getList(dto: GetTownListDto) {
+    return $town.get<GetTownResponseDto[]>("/", { params: dto });
   }
 }
