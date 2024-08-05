@@ -1,8 +1,13 @@
 import { LocationIcon, SearchIcon } from "@/app/assets";
 import { UiButton } from "@/shared/ui";
 import { components, ControlProps } from "react-select";
-import styles from "./town-select-control.styles.module.scss";
-export const TownSelectControl = (props: ControlProps) => {
+import styles from "./ui-town-select-control.styles.module.scss";
+import { UiSelectOptionType } from "@/shared/ui/select";
+
+interface Props extends ControlProps<UiSelectOptionType, false> {
+  onLocation: () => void;
+}
+export const UiTownSelectControl = (props: Props) => {
   return (
     <components.Control {...props}>
       <span style={{ marginLeft: "10px", display: "flex" }}>
@@ -11,6 +16,7 @@ export const TownSelectControl = (props: ControlProps) => {
       {props.children}
       <span style={{ marginRight: "-4px", display: "flex" }}>
         <UiButton
+          onClick={props.onLocation}
           className={styles["town_select_control-location_button"]}
           type="second"
           left={<LocationIcon />}

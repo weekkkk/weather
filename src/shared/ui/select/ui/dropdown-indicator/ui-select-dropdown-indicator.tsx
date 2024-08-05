@@ -1,7 +1,10 @@
 import { ChevronDownIcon } from "@/app/assets";
 import { components, DropdownIndicatorProps } from "react-select";
+import { UiSelectOptionType } from "../../types";
 
-export const UiSelectDropdownIndicator = (props: DropdownIndicatorProps) => {
+export const UiSelectDropdownIndicator: React.FC<
+  DropdownIndicatorProps<UiSelectOptionType, false>
+> = (props) => {
   return (
     <components.DropdownIndicator {...props}>
       <ChevronDownIcon />

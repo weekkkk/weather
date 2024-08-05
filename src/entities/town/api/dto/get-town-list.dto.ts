@@ -1,4 +1,4 @@
 export type GetTownListDto = {
-  country: "US" | "RU";
+  country: "US" | "RU" | "MD";
   limit: number;
 };

@@ -1,8 +1,9 @@
 import { makeAutoObservable } from "mobx";
 import { YmapsService } from "../services";
+import { GeoObjectCollection } from "../api";
 
 class YmapsStore {
-  currentAdress: object | null = null;
+  currentAdress: GeoObjectCollection | null = null;
 
   isLoading = false;
 
@@ -10,8 +11,8 @@ class YmapsStore {
     makeAutoObservable(this);
   }
 
-  getCurrentAdress = (callBack?: (adress: object) => void) => {
-    if (this.isLoading) return;
+  getCurrentAdress = (callBack?: (adress: GeoObjectCollection) => void) => {
+    if (this.isLoading || this.currentAdress) return;
     this.isLoading = true;
 
     navigator.geolocation.getCurrentPosition(
@@ -22,9 +23,10 @@ class YmapsStore {
           longitude: coords.longitude,
         });
 
-        this.currentAdress = response.data;
+        this.currentAdress = response.data.response.GeoObjectCollection
+          .GeoObjectCollection as GeoObjectCollection;
 
-        callBack?.(response.data);
+        callBack?.(response.data.response.GeoObjectCollection);
 
         this.isLoading = false;
       },
@@ -32,6 +34,10 @@ class YmapsStore {
         console.log(err);
       }
     );
+  };
+
+  getTownNameByAddress = (addres: GeoObjectCollection): string => {
+    return addres.featureMember[0].GeoObject.name;
   };
 }
 

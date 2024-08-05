@@ -17,4 +17,4 @@ const $ymaps = axios.create({
 
 export { $ymaps };
 
-export type { GetAdressByCoordsDto } from "./dto";
+export type { GetAdressByCoordsDto, GeoObjectCollection } from "./dto";

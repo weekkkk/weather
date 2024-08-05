@@ -3,6 +3,7 @@ import { ITown } from "../models";
 import { TownServise } from "../services";
 
 class TownStore {
+  town: ITown | null = null;
   townList: ITown[] | null = null;
   isLoading = false;
 
@@ -10,13 +11,17 @@ class TownStore {
     makeAutoObservable(this);
   }
 
+  setTown = (newTown: ITown | null) => {
+    this.town = newTown;
+  };
+
   getTownList = async () => {
     if (this.isLoading) return;
 
     this.isLoading = true;
 
     try {
-      const response = await TownServise.getList({ country: "RU", limit: 30 });
+      const response = await TownServise.getList({ country: "MD", limit: 30 });
 
       this.townList = response.data.map((res) => {
         const town: ITown = { name: res.name };

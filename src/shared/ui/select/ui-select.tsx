@@ -1,8 +1,9 @@
 import Select, { StylesConfig, Props } from "react-select";
 import { UiSelectDropdownIndicator } from "./ui";
+import { UiSelectOptionType } from "./types";
 
-export function UiSelect(props: Props) {
-  const styles: StylesConfig = {
+export const UiSelect = (props: Props<UiSelectOptionType, false>) => {
+  const styles: StylesConfig<UiSelectOptionType> = {
     control: (provided, state) => ({
       ...provided,
       border: "none",
@@ -12,14 +13,15 @@ export function UiSelect(props: Props) {
     }),
     indicatorSeparator: () => ({ display: "none" }),
   };
+
   return (
-    <Select
+    <Select<UiSelectOptionType, false>
       {...props}
       styles={styles}
       components={{
         ...props.components,
         DropdownIndicator: UiSelectDropdownIndicator,
       }}
-    ></Select>
+    />
   );
-}
+};

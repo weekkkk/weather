@@ -1,2 +1,2 @@
 export { townStore } from "./stores";
-export { TownSelect } from "./ui";
+export { UiTownSelect } from "./ui";

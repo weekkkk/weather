@@ -1,1 +1,1 @@
-export { TownSelect } from "./town-select";
+export { UiTownSelect } from "./ui-town-select";

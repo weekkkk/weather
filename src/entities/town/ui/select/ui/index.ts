@@ -1,1 +1,1 @@
-export { TownSelectControl } from "./town-select-control";
+export { UiTownSelectControl } from "./ui-town-select-control";
