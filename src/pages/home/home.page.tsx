@@ -6,11 +6,13 @@ import { useEffect } from "react";
 export const HomePage = observer(() => {
   const {
     $town: { getTownList, townList },
+    $ymaps: { getCurrentAdress },
   } = useRootStore();
 
   useEffect(() => {
     getTownList();
-  }, [getTownList]);
+    getCurrentAdress();
+  }, [getTownList, getCurrentAdress]);
 
   return (
     <div>
