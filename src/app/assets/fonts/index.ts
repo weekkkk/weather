@@ -1,0 +1,1 @@
+export { MontserratFontStylesModule } from "./Montserrat";

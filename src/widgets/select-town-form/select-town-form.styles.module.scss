@@ -1,0 +1,9 @@
+.select_town_form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &-title {
+    text-align: center;
+  }
+}

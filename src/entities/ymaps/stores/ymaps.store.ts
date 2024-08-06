@@ -11,6 +11,10 @@ class YmapsStore {
     makeAutoObservable(this);
   }
 
+  setCurrentAdress = (adress: GeoObjectCollection) => {
+    this.currentAdress = adress;
+  };
+
   getCurrentAdress = (callBack?: (adress: GeoObjectCollection) => void) => {
     if (this.isLoading || this.currentAdress) return;
     this.isLoading = true;
@@ -22,9 +26,6 @@ class YmapsStore {
           latitude: coords.latitude,
           longitude: coords.longitude,
         });
-
-        this.currentAdress = response.data.response.GeoObjectCollection
-          .GeoObjectCollection as GeoObjectCollection;
 
         callBack?.(response.data.response.GeoObjectCollection);
 

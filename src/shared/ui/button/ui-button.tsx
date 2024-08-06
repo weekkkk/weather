@@ -1,31 +1,35 @@
 import cls from "classnames";
 import styles from "./ui-button.styles.module.scss";
 
-type PropsType = {
+interface PropsType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: JSX.Element | string;
-  onClick: () => void;
-  type?: string;
+  onClick?: () => void;
+  color?: string;
   left?: JSX.Element;
+  right?: JSX.Element;
   className?: string;
-};
+}
 
-export const UiButton = ({
+export const UiButton: React.FC<PropsType> = ({
   onClick,
   children,
-  type,
+  color,
   left,
+  right,
   className,
-}: PropsType) => {
+  ...rest
+}) => {
   const classes = cls(styles["ui_button"], {
-    [styles["ui_button-primary"]]: !type || type == "primary",
-    [styles["ui_button-second"]]: type == "second",
+    [styles["ui_button-primary"]]: !color || color == "primary",
+    [styles["ui_button-second"]]: color == "second",
     [styles["ui_button-no_child"]]: !children,
   });
 
   return (
-    <button onClick={onClick} className={`${classes} ${className}`}>
+    <button {...rest} onClick={onClick} className={`${classes} ${className}`}>
       {left}
       {children}
+      {right}
     </button>
   );
 };

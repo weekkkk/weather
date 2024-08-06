@@ -18,7 +18,8 @@ export const UiTownSelectControl = (props: Props) => {
         <UiButton
           onClick={props.onLocation}
           className={styles["town_select_control-location_button"]}
-          type="second"
+          color="second"
+          type="button"
           left={<LocationIcon />}
         />
       </span>

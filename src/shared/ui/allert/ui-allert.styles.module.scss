@@ -1,0 +1,13 @@
+.ui_allert {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  padding: 16px 12px;
+  font-size: 12px;
+  background-color: #e1e1e1;
+  color: #8d8d8d;
+  > * {
+    display: inline-flex;
+  }
+}
