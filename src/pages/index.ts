@@ -1,2 +1,2 @@
 export { HomePage } from "./home";
-export {} from "./town-weather";
+export { TownWeatherPage } from "./town-weather";

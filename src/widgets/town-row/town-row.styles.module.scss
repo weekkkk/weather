@@ -1,0 +1,12 @@
+.town_row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 16px 24px;
+  &-title {
+    display: flex;
+    align-items: center;
+  }
+}

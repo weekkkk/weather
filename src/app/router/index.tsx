@@ -1,4 +1,4 @@
-import { HomePage } from "@/pages";
+import { TownWeatherPage } from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
 import { ModalLayout } from "../layouts";
 import { SelectTownForm } from "@/widgets";
@@ -6,7 +6,7 @@ import { SelectTownForm } from "@/widgets";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <TownWeatherPage />,
     children: [
       {
         path: "form",
