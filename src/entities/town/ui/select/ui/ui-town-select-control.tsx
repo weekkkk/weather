@@ -1,8 +1,7 @@
-import { LocationIcon, SearchIcon } from "@/app/assets";
-import { UiButton } from "@/shared/ui";
 import { components, ControlProps } from "react-select";
+import { LocationIcon, SearchIcon } from "@/app/assets";
+import { UiButton, UiSelectOptionType } from "@/shared";
 import styles from "./ui-town-select-control.styles.module.scss";
-import { UiSelectOptionType } from "@/shared/ui/select";
 
 interface Props extends ControlProps<UiSelectOptionType, false> {
   onLocation: () => void;

@@ -1,14 +1,11 @@
-import { useRootStore } from "@/app/contexts";
-import { UiTownSelect } from "@/entities";
-import { GeoObjectCollection } from "@/entities/ymaps/api";
 import { FC, FormEvent, useEffect, useState } from "react";
-import { observer } from "mobx-react-lite";
-import { ITown } from "@/entities/town/models";
-import { UiAllert, UiButton } from "@/shared/ui";
-import { ArrowCircleRightIcon } from "@/app/assets";
-import styles from "./select-town-form.styles.module.scss";
-import { InfoCircleIcon } from "@/app/assets/icons/info-circle.icon";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { useRootStore } from "@/app/contexts";
+import { ArrowCircleRightIcon, InfoCircleIcon } from "@/app/assets";
+import { UiTownSelect, ITown, GeoObjectCollection } from "@/entities";
+import { UiAllert, UiButton } from "@/shared";
+import styles from "./select-town-form.styles.module.scss";
 
 type SelectTownFormPropsType = {
   callBack: (navigate: NavigateFunction) => void;

@@ -1,8 +1,7 @@
-import { UiSelect } from "@/shared";
-import { UiTownSelectControl } from "./ui";
-import { ITown } from "../../models";
-import { UiSelectOptionType } from "@/shared/ui/select";
 import { useEffect, useState } from "react";
+import { UiSelect, UiSelectOptionType } from "@/shared";
+import { ITown } from "../../models";
+import { UiTownSelectControl } from "./ui";
 
 type PropsType = {
   value: ITown | null;

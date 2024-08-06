@@ -1,4 +1,4 @@
 export { UiButton } from "./button";
 export { UiInput } from "./input";
-export { UiSelect } from "./select";
+export { UiSelect, type UiSelectOptionType } from "./select";
 export { UiAllert } from "./allert";
