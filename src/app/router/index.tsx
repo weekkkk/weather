@@ -1,27 +1,17 @@
-import { TownWeatherPage } from "@/pages";
+import { CountryListPage, TownListPage, TownWeatherPage } from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
-import { ModalLayout } from "../layouts";
-import { SelectTownForm } from "@/widgets";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    element: <CountryListPage />,
+  },
+  {
+    path: "/:counryId",
+    element: <TownListPage />,
+  },
+  {
+    path: "/:counryId/:townId",
     element: <TownWeatherPage />,
-    children: [
-      {
-        path: "form",
-        element: <ModalLayout />,
-        children: [
-          {
-            path: "select-town",
-            element: (
-              <SelectTownForm
-                callBack={(navigate) => navigate({ pathname: "/" })}
-              />
-            ),
-          },
-        ],
-      },
-    ],
   },
 ]);

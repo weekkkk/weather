@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
-import { GlobalStylesModule, MontserratFontStylesModule } from "./assets";
-GlobalStylesModule;
-MontserratFontStylesModule;
+import("./assets/styles/index.scss");
+
+// import { GlobalStylesModule, MontserratFontStylesModule } from "./assets";
+// GlobalStylesModule;
+// MontserratFontStylesModule;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

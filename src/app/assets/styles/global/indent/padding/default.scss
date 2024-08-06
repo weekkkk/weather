@@ -1,0 +1,23 @@
+:root {
+  .p-0 {
+    padding: var(--w-indent-0);
+  }
+  .p-1 {
+    padding: var(--w-indent-1);
+  }
+  .p-2 {
+    padding: var(--w-indent-2);
+  }
+  .p-3 {
+    padding: var(--w-indent-3);
+  }
+  .p-4 {
+    padding: var(--w-indent-4);
+    &_5 {
+      padding: calc(var(--w-indent-4) + var(--w-spacer) * 0.5);
+    }
+  }
+  .p-5 {
+    padding: var(--w-indent-5);
+  }
+}

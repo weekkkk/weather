@@ -1,0 +1,11 @@
+:root {
+  --w-spacer: 1rem;
+
+  // INDENT
+  --w-indent-0: 0;
+  --w-indent-1: calc(var(--w-spacer) * 0.25);
+  --w-indent-2: calc(var(--w-spacer) * 0.5);
+  --w-indent-3: calc(var(--w-spacer));
+  --w-indent-4: calc(var(--w-spacer) * 1.5);
+  --w-indent-5: calc(var(--w-spacer) * 3);
+}

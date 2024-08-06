@@ -5,3 +5,5 @@ export {
   UiAllert,
   UiButton,
 } from "./ui";
+
+export { WrapLayout } from "./layouts";

@@ -1,0 +1,18 @@
+@import "./global/index";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Montserrat";
+  line-height: var(--w-lh-regular);
+  color: var(--w-base);
+  background-color: var(--w-second-0);
+}

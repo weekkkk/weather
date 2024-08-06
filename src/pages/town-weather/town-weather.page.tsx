@@ -1,11 +1,5 @@
-import { TownRow } from "@/widgets";
-import { Outlet } from "react-router-dom";
+import { FC } from "react";
 
-export const TownWeatherPage = () => {
-  return (
-    <>
-      <TownRow />
-      <Outlet />
-    </>
-  );
+export const TownWeatherPage: FC = () => {
+  return <></>;
 };

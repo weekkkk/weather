@@ -1,0 +1,45 @@
+:root {
+  --w-brand: #14345a;
+  --w-success: #16b86a;
+  --w-warn: #e7c039;
+  --w-danger: #d84c4c;
+  --w-base: #292929;
+  --w-default: #ffffff;
+
+  .c-brand {
+    color: var(--w-brand);
+  }
+  .bg-brand {
+    background-color: var(--w-brand);
+  }
+  .c-success {
+    color: var(--w-success);
+  }
+  .bg-success {
+    background-color: var(--w-success);
+  }
+  .c-warn {
+    color: var(--w-warn);
+  }
+  .bg-warn {
+    background-color: var(--w-warn);
+  }
+  .c-danger {
+    color: var(--w-danger);
+  }
+  .bg-danger {
+    background-color: var(--w-danger);
+  }
+  .c-base {
+    color: var(--w-base);
+  }
+  .bg-base {
+    background-color: var(--w-base);
+  }
+  .c-default {
+    color: var(--w-default);
+  }
+  .bg-default {
+    background-color: var(--w-default);
+  }
+}

@@ -1,0 +1,15 @@
+:root {
+  // LINE HEIGHT
+  .lh-no {
+    line-height: var(--w-lh-no);
+  }
+  .lh-compact {
+    line-height: var(--w-lh-compact);
+  }
+  .lh-regular {
+    line-height: var(--w-lh-regular);
+  }
+  .lh-loose {
+    line-height: var(--w-lh-loose);
+  }
+}
