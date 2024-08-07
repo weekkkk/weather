@@ -4,9 +4,12 @@ import App from "./App";
 
 import("./assets/styles/index.scss");
 
-// import { GlobalStylesModule, MontserratFontStylesModule } from "./assets";
-// GlobalStylesModule;
-// MontserratFontStylesModule;
+import {
+  MontserratFontStylesModule,
+  NotoColorEmojiFontStylesModule,
+} from "./assets";
+MontserratFontStylesModule;
+NotoColorEmojiFontStylesModule;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

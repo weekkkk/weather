@@ -1,3 +1,6 @@
 export * from "./icons";
 
-export { MontserratFontStylesModule } from "./fonts";
+export {
+  MontserratFontStylesModule,
+  NotoColorEmojiFontStylesModule,
+} from "./fonts";

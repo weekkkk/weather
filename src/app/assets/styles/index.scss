@@ -11,8 +11,15 @@ html {
 }
 
 body {
-  font-family: "Montserrat";
+  font-family: "Montserrat", "NotoColorEmoji";
   line-height: var(--w-lh-regular);
   color: var(--w-base);
   background-color: var(--w-second-0);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
 }
