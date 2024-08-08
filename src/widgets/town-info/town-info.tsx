@@ -2,12 +2,8 @@ import { useRootStore } from "@/app/contexts";
 import { BadRequestError, WrapLayout } from "@/shared";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
-import {
-  TownInfoNoCountryPlaceholder,
-  TownInfoNoTownPlaceholder,
-  TownSelectFormLoadingPlaceholder,
-} from "./components";
 import { useNavigate, useParams } from "react-router-dom";
+import { CountryPlaceholder, TownPlaceholder } from "@/entities";
 
 export const TownInfo: FC = observer(() => {
   const navigate = useNavigate();
@@ -64,8 +60,8 @@ export const TownInfo: FC = observer(() => {
         </div>
       </WrapLayout>
     );
-  else if (isCountryLoading || isTownLoading)
-    return <TownSelectFormLoadingPlaceholder />;
-  else if (!Country) return <TownInfoNoCountryPlaceholder />;
-  else return <TownInfoNoTownPlaceholder />;
+  else if (isCountryLoading) return <CountryPlaceholder isRequest />;
+  else if (isTownLoading) return <TownPlaceholder isRequest />;
+  else if (!Country) return <CountryPlaceholder />;
+  else return <TownPlaceholder />;
 });

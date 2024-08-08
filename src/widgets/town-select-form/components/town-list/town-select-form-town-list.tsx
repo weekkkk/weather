@@ -1,10 +1,9 @@
 import { useRootStore } from "@/app/contexts";
-import { TownList, ITown } from "@/entities";
+import { TownList, ITown, TownPlaceholder } from "@/entities";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ITownSelectFormTownListProps } from "./interfaces";
-import { TownSelectFormTownListLoadingPlaceholder } from "./components";
 
 export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
   observer(({ country }) => {
@@ -28,6 +27,6 @@ export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
     };
 
     if (list?.length) return <TownList onSelect={handleSelect} list={list} />;
-    else if (IsLoading) return <TownSelectFormTownListLoadingPlaceholder />;
-    else return <h1>Города не найдены</h1>;
+    else if (IsLoading) return <TownPlaceholder isList isRequest />;
+    else return <TownPlaceholder isList />;
   });

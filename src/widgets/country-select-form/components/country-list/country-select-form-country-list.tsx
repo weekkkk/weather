@@ -1,9 +1,8 @@
 import { useRootStore } from "@/app/contexts";
-import { CountryList, ICountry } from "@/entities";
+import { CountryList, CountryPlaceholder, ICountry } from "@/entities";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CountrySelectFormCountryListLoadingPlaceholder } from "./components";
 
 export const CounrtrySelectFormCountryList: FC = observer(() => {
   const {
@@ -26,6 +25,6 @@ export const CounrtrySelectFormCountryList: FC = observer(() => {
   };
 
   if (list?.length) return <CountryList onSelect={handleSelect} list={list} />;
-  else if (IsLoading) return <CountrySelectFormCountryListLoadingPlaceholder />;
-  else return <h1>Стран нет</h1>;
+  else if (IsLoading) return <CountryPlaceholder isRequest isList />;
+  else return <CountryPlaceholder isList />;
 });

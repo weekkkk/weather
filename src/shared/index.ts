@@ -4,7 +4,9 @@ export {
   type UiSelectOptionType,
   UiAllert,
   UiButton,
-} from "./ui";
+  Placeholder,
+  Loader,
+} from "./components";
 
 export { WrapLayout } from "./layouts";
 

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { IIconProps } from "./interfaces";
 
-export const RefreshCircleIcon: FC<IIconProps> = ({ size }) => {
+export const RefreshCircleIcon: FC<IIconProps> = ({ size = 24 }) => {
   return (
     <svg
       width={size}

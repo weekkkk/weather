@@ -2,7 +2,7 @@ import axios from "axios";
 
 const TOWN_API_URL = "https://api.api-ninjas.com/v1/city";
 
-const TOWN_API_KEY = "Swr1nPY0jbuf3ernbLob2g==6OcxK4Vrz2qPTpUM";
+const TOWN_API_KEY = "B9Lv84FKOLHb9uMnedJeYQ==n52jYp5SffDxUvcg";
 
 const $town = axios.create({
   // withCredentials: true,
