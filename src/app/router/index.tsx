@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     element: <TownListPage />,
   },
   {
-    path: "/:countryId/:townId",
+    path: "/:countryId/:townName",
     element: <TownWeatherPage />,
   },
 ]);

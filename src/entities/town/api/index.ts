@@ -14,4 +14,4 @@ const $town = axios.create({
 
 export { $town };
 
-export type { GetTownListDto, GetTownResponseDto } from "./dto";
+export type { GetTownListDto, GetTownResponseDto, GetTownDto } from "./dto";

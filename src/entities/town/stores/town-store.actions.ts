@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { TownStoreState } from "./town-store.state";
 import { TownService } from "../services";
 import { ITown } from "../interfaces";
+import { BadRequestError } from "@/shared";
 // import { ITown } from "../interfaces";
 
 export class TownStoreActions {
@@ -44,5 +45,33 @@ export class TownStoreActions {
       console.log(error);
     }
     this.stopLoading();
+  };
+
+  getTown = async (townName: string) => {
+    if (this.isLoading) throw new Error("Уже идет запрос");
+    this.startLoading();
+    try {
+      const response = await this.service.getOne({
+        name: townName,
+      });
+
+      if (!response.data.length)
+        throw new BadRequestError(
+          `Неверное значение townName: ${townName}`,
+          "townName"
+        );
+
+      const { name, country } = response.data[0];
+      const town: ITown = {
+        name,
+      };
+      this.state.Town = town;
+      return { town, countryName: country };
+    } catch (error) {
+      console.log();
+      throw error;
+    } finally {
+      this.stopLoading();
+    }
   };
 }
