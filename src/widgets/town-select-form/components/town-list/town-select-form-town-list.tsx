@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ITownSelectFormTownListProps } from "./interfaces";
+import { TownSelectFormTownListLoadingPlaceholder } from "./components";
 
 export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
   observer(({ country }) => {
@@ -27,6 +28,6 @@ export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
     };
 
     if (list?.length) return <TownList onSelect={handleSelect} list={list} />;
-    else if (IsLoading) return <h1>Получаем города...</h1>;
-    else return <h1>Города не найдены...</h1>;
+    else if (IsLoading) return <TownSelectFormTownListLoadingPlaceholder />;
+    else return <h1>Города не найдены</h1>;
   });

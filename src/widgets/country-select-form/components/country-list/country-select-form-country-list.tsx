@@ -3,6 +3,7 @@ import { CountryList, ICountry } from "@/entities";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CountrySelectFormCountryListLoadingPlaceholder } from "./components";
 
 export const CounrtrySelectFormCountryList: FC = observer(() => {
   const {
@@ -25,6 +26,6 @@ export const CounrtrySelectFormCountryList: FC = observer(() => {
   };
 
   if (list?.length) return <CountryList onSelect={handleSelect} list={list} />;
-  else if (IsLoading) return <h1>Получаем страны...</h1>;
-  else return <h1>Стран нет...</h1>;
+  else if (IsLoading) return <CountrySelectFormCountryListLoadingPlaceholder />;
+  else return <h1>Стран нет</h1>;
 });

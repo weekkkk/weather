@@ -1,5 +1,10 @@
 import { FC, useEffect } from "react";
-import { TownSelectFormTownList, TownSelectFormSearch } from "./components";
+import {
+  TownSelectFormTownList,
+  TownSelectFormSearch,
+  TownSelectFormNoCountryPlaceholder,
+  TownSelectFormLoadingPlaceholder,
+} from "./components";
 import { useRootStore } from "@/app/contexts";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
@@ -10,7 +15,7 @@ export const TownSelectForm: FC = observer(() => {
   const {
     $country: {
       state: { Country },
-      actions: { getCountry },
+      actions: { getCountry, IsLoading },
     },
   } = useRootStore();
 
@@ -32,5 +37,6 @@ export const TownSelectForm: FC = observer(() => {
         <TownSelectFormTownList country={Country} />
       </div>
     );
-  else return <h1>Получение</h1>;
+  else if (IsLoading) return <TownSelectFormLoadingPlaceholder />;
+  else return <TownSelectFormNoCountryPlaceholder />;
 });

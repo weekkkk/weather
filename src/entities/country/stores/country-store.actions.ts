@@ -55,9 +55,9 @@ export class CountryStoreActions {
   };
 
   getCountry = async (countryId: string) => {
+    if (this.isLoading) throw new Error("Уже идет запрос");
+    this.startLoading();
     try {
-      if (this.isLoading) throw new Error("Уже идет запрос");
-      this.startLoading();
       const response = await this.service.getCountry({ name: countryId });
 
       if (!response.data.length)
