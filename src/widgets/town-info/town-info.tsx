@@ -11,11 +11,11 @@ export const TownInfo: FC = observer(() => {
   const {
     $country: {
       state: { Country },
-      actions: { getCountry, IsLoading: isCountryLoading },
+      actions: { getCountry, getIsLoading: getIsCountryLoading },
     },
     $town: {
       state: { Town },
-      actions: { IsLoading: isTownLoading, getTown },
+      actions: { getIsLoading: getIsTownLoading, getTown },
     },
   } = useRootStore();
 
@@ -60,8 +60,9 @@ export const TownInfo: FC = observer(() => {
         </div>
       </WrapLayout>
     );
-  else if (isCountryLoading) return <CountryPlaceholder isRequest />;
-  else if (isTownLoading) return <TownPlaceholder isRequest />;
+  else if (getIsCountryLoading(getCountry))
+    return <CountryPlaceholder isRequest />;
+  else if (getIsTownLoading(getTown)) return <TownPlaceholder isRequest />;
   else if (!Country) return <CountryPlaceholder />;
   else return <TownPlaceholder />;
 });

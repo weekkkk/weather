@@ -2,54 +2,52 @@ import { makeAutoObservable } from "mobx";
 import { TownStoreState } from "./town-store.state";
 import { TownService } from "../services";
 import { ITown } from "../interfaces";
-import { BadRequestError } from "@/shared";
+import { BadRequestError, LoadingError, LoadingService } from "@/shared";
 // import { ITown } from "../interfaces";
 
 export class TownStoreActions {
   private state: TownStoreState;
   private service: TownService;
+  private loading: LoadingService;
 
-  private isLoading = false;
-  get IsLoading() {
-    return this.isLoading;
-  }
-  private startLoading() {
-    this.isLoading = true;
-  }
-  private stopLoading() {
-    this.isLoading = false;
-  }
+  getIsLoading = <T extends { name: string }>(func?: T) => {
+    return this.loading.getIsLoading(func);
+  };
 
   constructor(state: TownStoreState) {
     this.state = state;
     this.service = new TownService();
+    this.loading = new LoadingService();
     makeAutoObservable(this);
   }
 
   getTownList = async (countryId: string) => {
-    if (this.isLoading) return;
-    this.startLoading();
+    if (this.loading.getIsLoading(this.getTownList)) throw new LoadingError();
+    this.loading.startLoading(this.getTownList);
     try {
       const response = await this.service.getList({
         country: countryId,
         limit: 30,
       });
-      this.state.TownList = response.data.map((responseTown) => {
+      this.state.TownList = Array.from(
+        new Map(
+          response.data.map((responseTown) => [responseTown.name, responseTown])
+        ).values()
+      ).map((responseTown) => {
         const { name } = responseTown;
         const town: ITown = {
           name,
         };
         return town;
       });
-    } catch (error) {
-      console.log(error);
+    } finally {
+      this.loading.stopLoading(this.getTownList);
     }
-    this.stopLoading();
   };
 
   getTown = async (townName: string) => {
-    if (this.isLoading) throw new Error("Уже идет запрос");
-    this.startLoading();
+    if (this.loading.getIsLoading(this.getTown)) throw new LoadingError();
+    this.loading.startLoading(this.getTown);
     try {
       const response = await this.service.getOne({
         name: townName,
@@ -67,11 +65,8 @@ export class TownStoreActions {
       };
       this.state.Town = town;
       return { town, countryName: country };
-    } catch (error) {
-      console.log();
-      throw error;
     } finally {
-      this.stopLoading();
+      this.loading.stopLoading(this.getTown);
     }
   };
 }

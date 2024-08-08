@@ -4,13 +4,14 @@ import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ITownSelectFormTownListProps } from "./interfaces";
+import { LoadingError } from "@/shared";
 
 export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
   observer(({ country }) => {
     const {
       $town: {
         state,
-        actions: { getTownList: getList, IsLoading },
+        actions: { getTownList, getIsLoading },
       },
     } = useRootStore();
     const { FilteredTownList: list } = state;
@@ -18,15 +19,17 @@ export const TownSelectFormTownList: FC<ITownSelectFormTownListProps> =
     const navigate = useNavigate();
 
     useEffect(() => {
-      getList(country.id);
-    }, [getList, country.id]);
+      getTownList(country.id).catch((error) => {
+        if (!(error instanceof LoadingError)) console.log(error);
+      });
+    }, [country]);
 
     const handleSelect = (town: ITown) => {
       state.Town = town;
       navigate(`${town.name}`);
     };
 
-    if (list?.length) return <TownList onSelect={handleSelect} list={list} />;
-    else if (IsLoading) return <TownPlaceholder isList isRequest />;
-    else return <TownPlaceholder isList />;
+    if (getIsLoading(getTownList)) return <TownPlaceholder isList isRequest />;
+    else if (!list?.length) return <TownPlaceholder isList />;
+    return <TownList onSelect={handleSelect} list={list} />;
   });

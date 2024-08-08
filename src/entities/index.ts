@@ -3,6 +3,7 @@ export {
   countryStore,
   CountryList,
   CountryPlaceholder,
+  CountrySelect,
 } from "./country";
 
 export {

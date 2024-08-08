@@ -2,22 +2,12 @@ import { makeAutoObservable } from "mobx";
 import { CountryStoreState } from "./country-store.state";
 import { CountryService } from "../services";
 import { ICountry } from "../interfaces";
-import { BadRequestError } from "@/shared";
+import { BadRequestError, LoadingError, LoadingService } from "@/shared";
 
 export class CountryStoreActions {
   private state: CountryStoreState;
   private service: CountryService;
-
-  private isLoading = false;
-  get IsLoading() {
-    return this.isLoading;
-  }
-  private startLoading() {
-    this.isLoading = true;
-  }
-  private stopLoading() {
-    this.isLoading = false;
-  }
+  private loading: LoadingService;
 
   private getFlagEmojiByCountryCode = (countryCode: string) => {
     const OFFSET = 0x1f1e6;
@@ -28,15 +18,21 @@ export class CountryStoreActions {
     return String.fromCodePoint(...codePoints);
   };
 
+  getIsLoading = <T extends { name: string }>(func?: T) => {
+    return this.loading.getIsLoading(func);
+  };
+
   constructor(state: CountryStoreState) {
     this.state = state;
     this.service = new CountryService();
+    this.loading = new LoadingService();
     makeAutoObservable(this);
   }
 
   getCountryList = async () => {
-    if (this.isLoading) return;
-    this.startLoading();
+    if (this.loading.getIsLoading(this.getCountryList))
+      throw new LoadingError();
+    this.loading.startLoading(this.getCountryList);
     try {
       const response = await this.service.getCountryList({ limit: 30 });
       this.state.CountryList = response.data.map((countryResponse) => {
@@ -48,15 +44,14 @@ export class CountryStoreActions {
         };
         return country;
       });
-    } catch (error) {
-      console.log(error);
+    } finally {
+      this.loading.stopLoading(this.getCountryList);
     }
-    this.stopLoading();
   };
 
   getCountry = async (countryId: string) => {
-    if (this.isLoading) throw new Error("Уже идет запрос");
-    this.startLoading();
+    if (this.loading.getIsLoading(this.getCountry)) throw new LoadingError();
+    this.loading.startLoading(this.getCountry);
     try {
       const response = await this.service.getCountry({ name: countryId });
 
@@ -75,7 +70,7 @@ export class CountryStoreActions {
       this.state.Country = country;
       return country;
     } finally {
-      this.stopLoading();
+      this.loading.stopLoading(this.getCountry);
     }
   };
 }

@@ -4,6 +4,7 @@ import { useRootStore } from "@/app/contexts";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
 import { CountryPlaceholder } from "@/entities";
+import { LoadingError } from "@/shared";
 
 export const TownSelectForm: FC = observer(() => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export const TownSelectForm: FC = observer(() => {
   const {
     $country: {
       state: { Country },
-      actions: { getCountry, IsLoading },
+      actions: { getCountry, getIsLoading },
     },
   } = useRootStore();
 
@@ -22,7 +23,7 @@ export const TownSelectForm: FC = observer(() => {
           navigate(`/${country.id}`, { replace: true });
         })
         .catch((error) => {
-          console.log(error);
+          if (!(error instanceof LoadingError)) console.log(error);
         });
   }, [Country, countryId, getCountry, navigate]);
 
@@ -33,6 +34,6 @@ export const TownSelectForm: FC = observer(() => {
         <TownSelectFormTownList country={Country} />
       </div>
     );
-  else if (IsLoading) return <CountryPlaceholder isRequest />;
+  else if (getIsLoading(getCountry)) return <CountryPlaceholder isRequest />;
   else return <CountryPlaceholder />;
 });

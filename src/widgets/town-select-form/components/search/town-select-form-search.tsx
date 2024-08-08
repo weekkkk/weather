@@ -10,10 +10,7 @@ export const TownSelectFormSearch: FC<ITownSelectFormSearchProps> = observer(
   ({ country }) => {
     const navigate = useNavigate();
     const {
-      $town: {
-        state,
-        actions: { IsLoading },
-      },
+      $town: { state },
     } = useRootStore();
 
     const handleBack = () => {
@@ -36,7 +33,7 @@ export const TownSelectFormSearch: FC<ITownSelectFormSearchProps> = observer(
           </div>
 
           <UiInput
-            isDisabled={IsLoading || !state.TownList?.length}
+            isDisabled={!state.TownList?.length}
             left={<SearchIcon />}
             value={state.TownSearchName}
             onChange={(newValue) => (state.TownSearchName = newValue)}

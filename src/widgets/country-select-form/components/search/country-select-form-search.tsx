@@ -8,7 +8,7 @@ export const CounrtrySelectFormSearch: FC = observer(() => {
   const {
     $country: {
       state,
-      actions: { IsLoading },
+      actions: { getIsLoading },
     },
   } = useRootStore();
 
@@ -18,7 +18,7 @@ export const CounrtrySelectFormSearch: FC = observer(() => {
         <h1>Выберите страну</h1>
 
         <UiInput
-          isDisabled={IsLoading || !state.CountryList?.length}
+          isDisabled={getIsLoading() || !state.CountryList?.length}
           left={<SearchIcon />}
           value={state.CountrySearchName}
           onChange={(newValue) => (state.CountrySearchName = newValue)}

@@ -10,4 +10,6 @@ export {
 
 export { WrapLayout } from "./layouts";
 
-export { BadRequestError } from "./errors";
+export { LoadingService } from "./actions";
+
+export { BadRequestError, LoadingError } from "./errors";

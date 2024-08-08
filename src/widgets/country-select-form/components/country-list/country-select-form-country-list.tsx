@@ -1,5 +1,6 @@
 import { useRootStore } from "@/app/contexts";
 import { CountryList, CountryPlaceholder, ICountry } from "@/entities";
+import { LoadingError } from "@/shared";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ export const CounrtrySelectFormCountryList: FC = observer(() => {
   const {
     $country: {
       state,
-      actions: { getCountryList: getList, IsLoading },
+      actions: { getCountryList, getIsLoading },
     },
   } = useRootStore();
   const { FilteredCountryList: list } = state;
@@ -16,8 +17,10 @@ export const CounrtrySelectFormCountryList: FC = observer(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getList();
-  }, [getList]);
+    getCountryList().catch((error) => {
+      if (!(error instanceof LoadingError)) console.log(error);
+    });
+  }, [getCountryList]);
 
   const handleSelect = (country: ICountry) => {
     state.Country = country;
@@ -25,6 +28,7 @@ export const CounrtrySelectFormCountryList: FC = observer(() => {
   };
 
   if (list?.length) return <CountryList onSelect={handleSelect} list={list} />;
-  else if (IsLoading) return <CountryPlaceholder isRequest isList />;
+  else if (getIsLoading(getCountryList))
+    return <CountryPlaceholder isRequest isList />;
   else return <CountryPlaceholder isList />;
 });
