@@ -2,7 +2,7 @@ import { WrapLayout } from "@/shared";
 import { FC } from "react";
 import { ICountryListItemProps } from "./interfaces";
 
-export const CoutryListItem: FC<ICountryListItemProps> = ({
+export const CountryListItem: FC<ICountryListItemProps> = ({
   id,
   name,
   flagEmoji,

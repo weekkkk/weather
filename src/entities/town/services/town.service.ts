@@ -1,7 +1,7 @@
 import { $town, GetTownResponseDto, GetTownListDto } from "../api";
 
-export class TownServise {
-  static getList(dto: GetTownListDto) {
+export class TownService {
+  getList = (dto: GetTownListDto) => {
     return $town.get<GetTownResponseDto[]>("/", { params: dto });
-  }
+  };
 }

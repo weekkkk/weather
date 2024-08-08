@@ -1,1 +1,1 @@
-export { TownServise } from "./town.service";
+export { TownService } from "./town.service";

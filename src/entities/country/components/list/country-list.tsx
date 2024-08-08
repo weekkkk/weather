@@ -1,14 +1,14 @@
 import { FC } from "react";
 import cls from "classnames";
 import { ICountryListProps } from "./interfaces";
-import { CoutryListItem } from "./components";
+import { CountryListItem } from "./components";
 import { CountryListStyles } from "./styles";
 
-export const CoutryList: FC<ICountryListProps> = ({ list, onSelect }) => {
+export const CountryList: FC<ICountryListProps> = ({ list, onSelect }) => {
   return (
     <ul className={cls(CountryListStyles["country_list"], "f fd-col g-4")}>
       {list.map((item) => (
-        <CoutryListItem
+        <CountryListItem
           onClick={() => onSelect(item)}
           key={item.id}
           {...item}

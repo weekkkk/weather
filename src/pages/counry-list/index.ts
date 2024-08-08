@@ -1,1 +1,1 @@
-export { CountryListPage } from "./coutry-list.page";
+export { CountryListPage } from "./country-list.page";

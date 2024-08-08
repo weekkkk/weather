@@ -1,2 +1,2 @@
-export { CounrtrySelectFormCoutryList } from "./country-list";
+export { CounrtrySelectFormCountryList } from "./country-list";
 export { CounrtrySelectFormSearch } from "./search";

@@ -1,0 +1,1 @@
+export { TownList } from "./list";

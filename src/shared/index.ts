@@ -7,3 +7,5 @@ export {
 } from "./ui";
 
 export { WrapLayout } from "./layouts";
+
+export { BadRequestError } from "./errors";

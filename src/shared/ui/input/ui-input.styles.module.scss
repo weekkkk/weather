@@ -22,5 +22,8 @@
     &-focus {
       box-shadow: 0 0 0 1px #0019ff;
     }
+    &-disabled {
+      background-color: var(--w-second-0);
+    }
   }
 }

@@ -1,1 +1,1 @@
-export { CoutryListItem } from "./item";
+export { CountryListItem } from "./item";

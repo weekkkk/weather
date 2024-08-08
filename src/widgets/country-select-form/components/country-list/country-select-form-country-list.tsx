@@ -1,10 +1,10 @@
 import { useRootStore } from "@/app/contexts";
-import { CoutryList, ICountry } from "@/entities";
+import { CountryList, ICountry } from "@/entities";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const CounrtrySelectFormCoutryList: FC = observer(() => {
+export const CounrtrySelectFormCountryList: FC = observer(() => {
   const {
     $country: {
       state,
@@ -24,7 +24,7 @@ export const CounrtrySelectFormCoutryList: FC = observer(() => {
     navigate(`/${country.id}`);
   };
 
-  if (list?.length) return <CoutryList onSelect={handleSelect} list={list} />;
+  if (list?.length) return <CountryList onSelect={handleSelect} list={list} />;
   else if (IsLoading) return <h1>Получаем страны...</h1>;
   else return <h1>Стран нет...</h1>;
 });

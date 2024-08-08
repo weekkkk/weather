@@ -1,36 +1,16 @@
 import { makeAutoObservable } from "mobx";
-import { ITown } from "../models";
-import { TownServise } from "../services";
+import { TownStoreState } from "./town-store.state";
+import { TownStoreActions } from "./town-store.actions";
 
 class TownStore {
-  town: ITown | null = null;
-  townList: ITown[] | null = null;
-  isLoading = false;
+  state: TownStoreState;
+  actions: TownStoreActions;
 
   constructor() {
+    this.state = new TownStoreState();
+    this.actions = new TownStoreActions(this.state);
     makeAutoObservable(this);
   }
-
-  setTown = (newTown: ITown | null) => {
-    this.town = newTown;
-  };
-
-  getTownList = async () => {
-    if (this.isLoading) return;
-
-    this.isLoading = true;
-
-    try {
-      const response = await TownServise.getList({ country: "MD", limit: 30 });
-
-      this.townList = response.data.map((res) => {
-        const town: ITown = { name: res.name };
-        return town;
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 }
 
 export const townStore = new TownStore();

@@ -5,11 +5,18 @@ import cls from "classnames";
 type PropsType = {
   value: string;
   onChange: (value: string) => void;
+  isDisabled?: boolean;
   left?: JSX.Element;
   right?: JSX.Element;
 };
 
-export function UiInput({ value, left, right, onChange }: PropsType) {
+export function UiInput({
+  value,
+  onChange,
+  isDisabled,
+  left,
+  right,
+}: PropsType) {
   const $input = useRef<HTMLInputElement>(null);
 
   const focus = () => {
@@ -20,6 +27,7 @@ export function UiInput({ value, left, right, onChange }: PropsType) {
 
   const classes = cls({
     [styles["ui_input-wrapper-focus"]]: isFocused,
+    [styles["ui_input-wrapper-disabled"]]: isDisabled,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +39,7 @@ export function UiInput({ value, left, right, onChange }: PropsType) {
     <div onClick={focus} className={styles["ui_input-wrapper"] + ` ${classes}`}>
       {left}
       <input
+        disabled={isDisabled}
         value={value}
         onChange={handleChange}
         ref={$input}

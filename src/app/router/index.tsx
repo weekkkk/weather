@@ -7,11 +7,11 @@ export const router = createBrowserRouter([
     element: <CountryListPage />,
   },
   {
-    path: "/:counryId",
+    path: "/:countryId",
     element: <TownListPage />,
   },
   {
-    path: "/:counryId/:townId",
+    path: "/:countryId/:townId",
     element: <TownWeatherPage />,
   },
 ]);

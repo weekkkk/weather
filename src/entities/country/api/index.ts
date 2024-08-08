@@ -13,4 +13,8 @@ const $country = axios.create({
 
 export { $country };
 
-export type { GetCountryListDto, GetCountryResponseDto } from "./dto";
+export type {
+  GetCountryListDto,
+  GetCountryResponseDto,
+  GetCountryDto,
+} from "./dto";

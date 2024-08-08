@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { CountryStoreState } from "./country-store.state";
 import { CountryService } from "../services";
 import { ICountry } from "../interfaces";
+import { BadRequestError } from "@/shared";
 
 export class CountryStoreActions {
   private state: CountryStoreState;
@@ -38,8 +39,8 @@ export class CountryStoreActions {
     this.startLoading();
     try {
       const response = await this.service.getCountryList({ limit: 30 });
-      this.state.CountryList = response.data.map((countryRespose) => {
-        const { iso2, name } = countryRespose;
+      this.state.CountryList = response.data.map((countryResponse) => {
+        const { iso2, name } = countryResponse;
         const country: ICountry = {
           id: iso2,
           name: name,
@@ -51,5 +52,30 @@ export class CountryStoreActions {
       console.log(error);
     }
     this.stopLoading();
+  };
+
+  getCountry = async (countryId: string) => {
+    try {
+      if (this.isLoading) throw new Error("Уже идет запрос");
+      this.startLoading();
+      const response = await this.service.getCountry({ name: countryId });
+
+      if (!response.data.length)
+        throw new BadRequestError(
+          `Не найдено странны c countryId: ${countryId}`,
+          "countryId"
+        );
+
+      const { iso2, name } = response.data[0];
+      const country: ICountry = {
+        id: iso2,
+        name: name,
+        flagEmoji: this.getFlagEmojiByCountryCode(iso2),
+      };
+      this.state.Country = country;
+      return country;
+    } finally {
+      this.stopLoading();
+    }
   };
 }

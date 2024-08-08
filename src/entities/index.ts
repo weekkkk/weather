@@ -1,4 +1,4 @@
-export { UiTownSelect, townStore, type ITown } from "./town";
+export { UiTownSelect, type ITown, townStore, TownList } from "./town";
 export { type GeoObjectCollection, ymapsStore } from "./ymaps";
 
-export { type ICountry, countryStore, CoutryList } from "./country";
+export { type ICountry, countryStore, CountryList } from "./country";

@@ -1,1 +1,1 @@
-export { CoutryList } from "./country-list";
+export { CountryList } from "./country-list";

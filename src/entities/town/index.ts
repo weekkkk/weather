@@ -1,3 +1,4 @@
+export type { ITown } from "./interfaces";
 export { townStore } from "./stores";
-export type { ITown } from "./models";
+export { TownList } from "./components";
 export { UiTownSelect } from "./ui";

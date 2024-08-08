@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UiSelect, UiSelectOptionType } from "@/shared";
-import { ITown } from "../../models";
+import { ITown } from "../../interfaces";
 import { UiTownSelectControl } from "./ui";
 
 type PropsType = {

@@ -5,3 +5,4 @@ export { LocationIcon } from "./location.icon";
 export { ArrowCircleRightIcon } from "./arrow-circle-right.icon";
 export { InfoCircleIcon } from "./info-circle.icon";
 export { GlobeIcon } from "./globe.icon";
+export { ArrowLeftIcon } from "./arrow-left.icon";
