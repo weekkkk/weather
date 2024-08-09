@@ -53,7 +53,11 @@ export class CountryStoreActions {
   };
 
   getCountry = async (countryId: string) => {
-    if (this.loading.getIsLoading(this.getCountry)) throw new LoadingError();
+    if (
+      this.loading.getIsLoading(this.getCountry) ||
+      this.state.Country?.id == countryId
+    )
+      throw new LoadingError();
     this.loading.startLoading(this.getCountry);
     try {
       const response = await this.service.getCountry({ name: countryId });

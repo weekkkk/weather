@@ -23,7 +23,7 @@ export const TownPlaceholder: FC<ICountryPlaceholderProps> = ({
     "Получение городов",
     "Города не найдены",
     "Получение города",
-    "Город не найдена"
+    "Город не найден"
   );
   const text = getStrByFlags(
     "На получение городов нужно немного времени",

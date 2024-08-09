@@ -14,41 +14,27 @@ export const TownInfo: FC<ITownInfoProps> = observer(
       },
       $town: {
         state: { Town },
-        actions: { getIsLoading: getIsTownLoading, getTown },
+        actions: { getTown, getIsLoading: getIsTownLoading },
       },
     } = useRootStore();
 
     useEffect(() => {
-      const initTown = async () => {
-        if (Town?.name == townName) throw new Error();
-        const { town, countryId: townCountryId } = await getTown(townName);
-        return { town, townCountryId };
-      };
-      const initCountry = async (initCountryId: string) => {
-        if (Country?.id == initCountryId) throw new Error();
-        const country = await getCountry(initCountryId);
-        return country;
-      };
-      const init = async () => {
-        try {
-          const { townCountryId, town } = await initTown();
-          if (town.name != townName) updateTownName(town.name);
-          if (townCountryId != countryId) updateCountryId(countryId);
-          const country = await initCountry(townCountryId);
-          console.log({ country });
-        } catch (err) {
-          if (!(err instanceof BadRequestError)) return;
-          if (err.keys.includes("townName")) {
-            const country = await initCountry(countryId);
-            if (countryId != country.id) updateCountryId(countryId);
-          }
-        }
-      };
-      init().catch((err) => {
-        if (!(err instanceof BadRequestError)) return;
-        console.log(err.message);
-      });
-    }, [countryId, townName]);
+      if (!Town) {
+        getTown(townName)
+          .then(({ townCountryId, town }) => {
+            if (town.name != townName) updateTownName(town.name);
+            if (townCountryId != countryId) updateCountryId(townCountryId);
+            if (!Country || Country.id != townCountryId) {
+              getCountry(townCountryId);
+            }
+          })
+          .catch((err) => {
+            if (!(err instanceof BadRequestError)) return;
+            if (err.keys.includes("townName") && !Country)
+              getCountry(countryId);
+          });
+      }
+    }, [townName]);
 
     if (Country && Town)
       return (

@@ -2,15 +2,22 @@ import { FC, useEffect, useState } from "react";
 import { UiSelect, UiSelectOptionType } from "@/shared";
 import { ITown } from "../../interfaces";
 import { TownSelectControl } from "./components";
+import { ICountry } from "@/entities/country";
 
 type PropsType = {
   value: ITown | null;
   onChange: (newValue: ITown | null) => void;
   list: ITown[] | null;
   onLocation?: () => void;
+  country: ICountry | null;
 };
 
-export const TownSelect: FC<PropsType> = ({ value, list, onChange }) => {
+export const TownSelect: FC<PropsType> = ({
+  value,
+  list,
+  onChange,
+  country,
+}) => {
   const townToOption = (town: ITown) => {
     const option: UiSelectOptionType = {
       value: town.name,
@@ -40,6 +47,7 @@ export const TownSelect: FC<PropsType> = ({ value, list, onChange }) => {
 
   return (
     <UiSelect
+      isDisabled={!country}
       value={optionValue}
       onChange={handleChange}
       options={options}

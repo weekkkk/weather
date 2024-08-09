@@ -9,39 +9,42 @@ export const HeaderLayout = () => {
   const navigate = useNavigate();
 
   const handleUpdateCountryId = (newCountryId: string) => {
-    console.log({ newCountryId });
-    navigate(`/${newCountryId}/${townName}`, { replace: true });
+    if (townName) navigate(`/${newCountryId}/${townName}`, { replace: true });
+    else navigate(`/${newCountryId}`, { replace: true });
   };
 
   const handleUpdateTownName = (newTownName: string) => {
-    console.log({ newTownName });
-
     navigate(`/${countryId}/${newTownName}`, { replace: true });
   };
-  if (countryId && townName)
-    return (
-      <header
-        className={cls(
-          HeaderLayoutStyles["header_layout"],
-          "bg-default py-2 px-4_5 f ai-c jc-sb"
-        )}
-      >
-        <div className="f g-3">
-          <ChangeCountrySelect
-            countryId={countryId}
-            townName={townName}
-            updateCountryId={handleUpdateCountryId}
-          />
 
-          <ChangeTownSelect
-            countryId={countryId}
-            townName={townName}
-            updateCountryId={handleUpdateCountryId}
-            updateTownName={handleUpdateTownName}
-          />
-        </div>
+  const countrySelect = countryId ? (
+    <ChangeCountrySelect
+      countryId={countryId}
+      updateCountryId={handleUpdateCountryId}
+    />
+  ) : undefined;
+  const townSelect =
+    countryId && townName ? (
+      <ChangeTownSelect
+        countryId={countryId}
+        townName={townName}
+        updateTownName={handleUpdateTownName}
+      />
+    ) : undefined;
 
-        <LogoIcon height={48} />
-      </header>
-    );
+  return (
+    <header
+      className={cls(
+        HeaderLayoutStyles["header_layout"],
+        "bg-default py-2 px-4_5 f ai-c jc-sb"
+      )}
+    >
+      <div className="f g-3">
+        {countrySelect}
+        {townSelect}
+      </div>
+
+      <LogoIcon height={48} />
+    </header>
+  );
 };

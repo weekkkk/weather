@@ -51,7 +51,11 @@ export class TownStoreActions {
   };
 
   getTown = async (townName: string) => {
-    if (this.loading.getIsLoading(this.getTown)) throw new LoadingError();
+    if (
+      this.loading.getIsLoading(this.getTown) ||
+      this.state.Town?.name == townName
+    )
+      throw new LoadingError();
     this.loading.startLoading(this.getTown);
     try {
       const response = await this.service.getOne({
@@ -69,7 +73,7 @@ export class TownStoreActions {
         name,
       };
       this.state.Town = town;
-      return { town, countryId: country };
+      return { town, townCountryId: country };
     } finally {
       this.loading.stopLoading(this.getTown);
     }
