@@ -17,4 +17,8 @@ export {
 
 export { type GeoObjectCollection, ymapsStore } from "./ymaps";
 
-export { weatherStore } from "./weather";
+export {
+  weatherStore,
+  type IWeatherRecord,
+  WeatherRecordList,
+} from "./weather";

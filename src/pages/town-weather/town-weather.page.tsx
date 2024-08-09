@@ -1,4 +1,4 @@
-import { TownInfo, WeatherRecondList } from "@/widgets";
+import { TownInfo, WeatherInfo } from "@/widgets";
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export const TownWeatherPage: FC = () => {
 
   if (countryId && townName)
     return (
-      <>
+      <div className="f fd-col g-4">
         <TownInfo
           countryId={countryId}
           townName={townName}
@@ -24,7 +24,7 @@ export const TownWeatherPage: FC = () => {
           updateTownName={handleUpdateTownName}
         />
 
-        <WeatherRecondList />
-      </>
+        <WeatherInfo />
+      </div>
     );
 };

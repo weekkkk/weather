@@ -8,4 +8,4 @@ export { CountrySelectForm } from "./country-select-form";
 export { TownSelectForm } from "./town-select-form";
 export { TownInfo } from "./town-info";
 
-export { WeatherRecondList } from "./weather-recond-list";
+export { WeatherInfo } from "./weather-info";
