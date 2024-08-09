@@ -16,3 +16,5 @@ export {
 } from "./town";
 
 export { type GeoObjectCollection, ymapsStore } from "./ymaps";
+
+export { weatherStore } from "./weather";

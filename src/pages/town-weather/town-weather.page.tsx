@@ -1,4 +1,4 @@
-import { TownInfo } from "@/widgets";
+import { TownInfo, WeatherRecondList } from "@/widgets";
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -23,6 +23,8 @@ export const TownWeatherPage: FC = () => {
           updateCountryId={handleUpdateCountryId}
           updateTownName={handleUpdateTownName}
         />
+
+        <WeatherRecondList />
       </>
     );
 };
