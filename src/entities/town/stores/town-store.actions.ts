@@ -29,6 +29,11 @@ export class TownStoreActions {
         country: countryId,
         limit: 30,
       });
+      if (!response.data.length)
+        throw new BadRequestError(
+          `Не найдено городов c countryId: ${countryId}`,
+          "countryId"
+        );
       this.state.TownList = Array.from(
         new Map(
           response.data.map((responseTown) => [responseTown.name, responseTown])
@@ -64,7 +69,7 @@ export class TownStoreActions {
         name,
       };
       this.state.Town = town;
-      return { town, countryName: country };
+      return { town, countryId: country };
     } finally {
       this.loading.stopLoading(this.getTown);
     }

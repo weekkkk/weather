@@ -30,7 +30,10 @@ export class CountryStoreActions {
   }
 
   getCountryList = async () => {
-    if (this.loading.getIsLoading(this.getCountryList))
+    if (
+      this.loading.getIsLoading(this.getCountryList) ||
+      this.state.CountryList?.length
+    )
       throw new LoadingError();
     this.loading.startLoading(this.getCountryList);
     try {

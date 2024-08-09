@@ -2,67 +2,67 @@ import { useRootStore } from "@/app/contexts";
 import { BadRequestError, WrapLayout } from "@/shared";
 import { observer } from "mobx-react-lite";
 import { FC, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { CountryPlaceholder, TownPlaceholder } from "@/entities";
+import { ITownInfoProps } from "./interfaces";
 
-export const TownInfo: FC = observer(() => {
-  const navigate = useNavigate();
-  const { countryId, townName } = useParams();
-  const {
-    $country: {
-      state: { Country },
-      actions: { getCountry, getIsLoading: getIsCountryLoading },
-    },
-    $town: {
-      state: { Town },
-      actions: { getIsLoading: getIsTownLoading, getTown },
-    },
-  } = useRootStore();
+export const TownInfo: FC<ITownInfoProps> = observer(
+  ({ countryId, updateCountryId, townName, updateTownName }) => {
+    const {
+      $country: {
+        state: { Country },
+        actions: { getCountry, getIsLoading: getIsCountryLoading },
+      },
+      $town: {
+        state: { Town },
+        actions: { getIsLoading: getIsTownLoading, getTown },
+      },
+    } = useRootStore();
 
-  useEffect(() => {
-    const getCountryWithPathFix = async (countryIdOrName: string) => {
-      try {
-        const country = await getCountry(countryIdOrName);
-        if (country.id != countryId)
-          navigate(`/${country.id}/${townName}`, { replace: true });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const getTownWithPathFix = async () => {
-      if (Town || !townName || !countryId) return;
-      try {
-        const { town, countryName } = await getTown(townName);
-        if (town.name != townName)
-          navigate(`/${countryId}/${town.name}`, { replace: true });
-        if (!Country) {
-          await getCountryWithPathFix(countryName);
+    useEffect(() => {
+      const initTown = async () => {
+        if (Town?.name == townName) throw new Error();
+        const { town, countryId: townCountryId } = await getTown(townName);
+        return { town, townCountryId };
+      };
+      const initCountry = async (initCountryId: string) => {
+        if (Country?.id == initCountryId) throw new Error();
+        const country = await getCountry(initCountryId);
+        return country;
+      };
+      const init = async () => {
+        try {
+          const { townCountryId, town } = await initTown();
+          if (town.name != townName) updateTownName(town.name);
+          if (townCountryId != countryId) updateCountryId(countryId);
+          const country = await initCountry(townCountryId);
+          console.log({ country });
+        } catch (err) {
+          if (!(err instanceof BadRequestError)) return;
+          if (err.keys.includes("townName")) {
+            const country = await initCountry(countryId);
+            if (countryId != country.id) updateCountryId(countryId);
+          }
         }
-      } catch (error) {
-        if (
-          !(error instanceof BadRequestError) ||
-          !error.keys.includes("townName") ||
-          Country
-        )
-          return;
-        getCountryWithPathFix(countryId);
-      }
-    };
-    getTownWithPathFix();
-  }, []);
+      };
+      init().catch((err) => {
+        if (!(err instanceof BadRequestError)) return;
+        console.log(err.message);
+      });
+    }, [countryId, townName]);
 
-  if (Country && Town)
-    return (
-      <WrapLayout>
-        <div className="f fd-col">
-          <span className="c-brand fw-semi_bold">{Country.name}</span>
-          <h1>{Town.name}</h1>
-        </div>
-      </WrapLayout>
-    );
-  else if (getIsCountryLoading(getCountry))
-    return <CountryPlaceholder isRequest />;
-  else if (getIsTownLoading(getTown)) return <TownPlaceholder isRequest />;
-  else if (!Country) return <CountryPlaceholder />;
-  else return <TownPlaceholder />;
-});
+    if (Country && Town)
+      return (
+        <WrapLayout>
+          <div className="f fd-col">
+            <span className="c-brand fw-semi_bold">{Country.name}</span>
+            <h1>{Town.name}</h1>
+          </div>
+        </WrapLayout>
+      );
+    else if (getIsCountryLoading(getCountry))
+      return <CountryPlaceholder isRequest />;
+    else if (getIsTownLoading(getTown)) return <TownPlaceholder isRequest />;
+    else if (!Country) return <CountryPlaceholder />;
+    else return <TownPlaceholder />;
+  }
+);

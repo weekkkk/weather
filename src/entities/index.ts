@@ -12,6 +12,7 @@ export {
   townStore,
   TownList,
   TownPlaceholder,
+  TownSelect,
 } from "./town";
 
 export { type GeoObjectCollection, ymapsStore } from "./ymaps";
